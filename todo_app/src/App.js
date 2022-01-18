@@ -3,8 +3,8 @@ import './App.css';
 import React, {useEffect, useState} from 'react'
 import List from './List'
 import db from './firebase'
-import database from './firebase';
-import { doc, addDoc , onSnapshot, collection, query ,Timestamp , } from "firebase/firestore";
+import firebase from './firebase';
+import { doc, addDoc , onSnapshot, orderBy , collection,serverTimestamp, query ,Timestamp , } from "firebase/firestore";
 
 function Btn(props){
   let clname = "ui button"
@@ -21,12 +21,12 @@ function Btn(props){
 function App() {
   const [todo, setTodos] = useState([])
   const [input,setInput] = useState('')
-  console.log(":)", input)
+  // console.log(":)", input)
 
   useEffect(()=>{
-    const q = query(collection(db, "Todolist"))
+    const q = query(collection(db, "Todolist"), orderBy('timestamp', 'desc'))
   const unsub = onSnapshot(q, (querySnapshot) => {
-    let arr = querySnapshot.docs.map(doc => doc.data().todo)
+    let arr = querySnapshot.docs.map(doc => ({id:doc.id , todo:doc.data().todo}))
     console.log("Data",arr );
    setTodos(arr) 
   });
@@ -35,15 +35,11 @@ function App() {
   const addTodo = async(ev)=>{
     // setTodos([...todo,input])
     ev.preventDefault()
-    // db.collection('Todolist').add({
-    //   todo:input
-    // })
-    const time = new Timestamp.now().
-    console.log(time)
-    // const docRef = await addDoc(collection(db,"Todolist"),{
-    //   todo:input,
-    //   // timestamp: time.now()
-    // })
+  
+    const docRef = await addDoc(collection(db,"Todolist"),{
+      todo:input,
+      timestamp: serverTimestamp()
+    })
 
     setInput("")
   }
