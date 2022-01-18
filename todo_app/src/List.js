@@ -19,13 +19,14 @@ function Todo({i,todo}){
     {
         return (
         <> 
-        <form className="field" onSubmit={addTodo}>
-            <div className='left floated ui form'>
+        
+        <form className="field " onSubmit={addTodo}>
+            <div className='center floated ui form'>
                 <div className="ui segment field">
                     <label>Update Value</label>
                     <input
                         placeholder='Name'
-                        value={input}
+                        defaultValue={todo.todo}
                         onChange={ev=>setInput(ev.target.value)}
                         autoFocus={true}
                     />        
@@ -36,7 +37,6 @@ function Todo({i,todo}){
             </div>
         </form>
         <button onClick={handleClose} className="negative ui button">Cancel</button>
-        
         </>
         )
     }

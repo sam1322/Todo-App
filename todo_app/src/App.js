@@ -27,7 +27,7 @@ function App() {
     const q = query(collection(db, "Todolist"), orderBy('timestamp', 'desc'))
   const unsub = onSnapshot(q, (querySnapshot) => {
     let arr = querySnapshot.docs.map(doc => ({id:doc.id , todo:doc.data().todo}))
-    console.log("Data",arr );
+    // console.log("Data",arr );
    setTodos(arr) 
   });
   },[])
