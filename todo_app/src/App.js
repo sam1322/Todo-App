@@ -3,8 +3,7 @@ import './App.css';
 import React, {useEffect, useState} from 'react'
 import List from './List'
 import db from './firebase'
-import firebase from './firebase';
-import { doc, addDoc , onSnapshot, orderBy , collection,serverTimestamp, query ,Timestamp , } from "firebase/firestore";
+import { doc, addDoc , onSnapshot, orderBy , collection,serverTimestamp, query  } from "firebase/firestore";
 
 function Btn(props){
   let clname = "ui button"
@@ -48,7 +47,7 @@ function App() {
     <div className="App">
      <h1>Hello World</h1>
   
-    <form className="  field" onSubmit={addTodo}>
+    <form className="field" onSubmit={addTodo}>
     <div className='left floated ui form'>
       <div className="ui segment field">
       <label>Add Todo</label>
